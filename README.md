@@ -11,9 +11,9 @@ These are the methods available for use at the moment
 -   Clear
 
 ## If you want instantiate some object in unity you can call
-> **Note:** The **Instantiate**  method are 2 overload to use
-> For every interaction with the pool you need to pass the key
-> The key is the original prefab to instantiate
+> **Note:** The **Instantiate**  method are 2 overload to use,
+> For every interaction with the pool you need to pass the key,
+> The key is the original prefab to instantiate,
 > When you call any method you will create a key of the original prefab if it doesn't exist
 
     Pool.Instantiate<T>
