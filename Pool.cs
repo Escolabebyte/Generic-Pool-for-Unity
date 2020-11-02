@@ -36,7 +36,7 @@ public static class Pool
             temp = (T)Pools[original][0];
             Pools[original].RemoveAt(0);
             ((MonoBehaviour)temp).gameObject.SetActive(true);
-        } 
+        }
         else
         {
             temp = MonoBehaviour.Instantiate(original, pos, rot);
@@ -85,10 +85,10 @@ public static class Pool
     }
 
     /// <summary>
-    /// 
+    /// Add all elements that are in the temporary pool in the fixed pool
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="original"></param>
+    /// <param name="original">Original object</param>
     public static void AddRange<T>(T original) where T : UnityEngine.Object
     {
         if (TempPool.ContainsKey(original))
@@ -100,6 +100,46 @@ public static class Pool
             }
 
             TempPool[original].Clear();
+        }
+    }
+
+    /// <summary>
+    /// Add an element in the pool
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="original">Original object</param>
+    /// <param name="obj">Object to add</param>
+    public static void Add<T>(T original, object obj)
+    {
+        if (!Pools.ContainsKey(original))
+            Pools.Add(original, new List<object>());
+
+        Pools[original].Add(obj);
+    }
+
+    /// <summary>
+    /// Clear the pool 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="original">Original object</param>
+    /// <param name="destroy"></param>
+    public static void Clear<T>(T original, bool destroy = false)
+    {
+        if (Pools.ContainsKey(original))
+        {
+            if (destroy)
+            {
+                foreach (var item in TempPool[original])
+                {
+                    if (item != null)
+                    {
+                        MonoBehaviour t = (MonoBehaviour)item;
+                        MonoBehaviour.Destroy(t.gameObject);
+                    }
+                }
+            }
+
+            Pools[original]
         }
     }
 }
