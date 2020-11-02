@@ -139,7 +139,7 @@ public static class Pool
                 }
             }
 
-            Pools[original]
+            Pools[original].Clear();
         }
     }
 }
